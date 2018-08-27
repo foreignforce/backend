@@ -1,0 +1,10 @@
+Resources:
+  TimeFunction:
+    Type: "AWS::Lambda::Function"
+    Properties: 
+      Code: ./
+      Description: Description
+      FunctionName: TimeFunction
+      Handler: index.handler
+      Role: arn:aws:iam::921647845311:role/lambda_basic_execution
+      Runtime: nodejs8.10
