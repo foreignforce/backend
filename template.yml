@@ -44,3 +44,16 @@ Resources:
               - dynamodb:Query
               - dynamodb:Scan
             Resource: !Join [ "", [ "arn:aws:dynamodb:eu-central-1:921647845311:table/foreignforce-mobilehub-1673183565-setting", "*" ] ]
+
+  UserPool:
+    Type: "AWS::Cognito::UserPool"
+    Description: "A Cognito user pool for authenticating users"
+    Properties:
+      UserPoolName: foreignforce-user-pool
+
+  UserPoolClient:
+    Type: "AWS::Cognito::UserPoolClient"
+    Description: "App Client used by AWS AppSync"
+    Properties:
+      ClientName: foreignforce-appsync-client
+      UserPoolId: !Ref UserPool
