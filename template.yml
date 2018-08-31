@@ -87,3 +87,30 @@ Resources:
         UserPoolId: !Ref UserPoolClient
         AwsRegion: !Sub ${AWS::Region}
         DefaultAction: "ALLOW"
+
+  AppSyncSchema:
+    Type: "AWS::AppSync::GraphQLSchema"
+    Properties:
+      ApiId: !GetAtt AppSyncApi.ApiId
+      Definition: |
+        type Note {
+          NoteId: ID!
+          title: String
+          content: String
+        }
+        type PaginatedNotes {
+          notes: [Note!]!
+          nextToken: String
+        }
+        type Query {
+          allNotes(limit: Int, nextToken: String): PaginatedNotes!
+          getNote(NoteId: ID!): Note
+        }
+        type Mutation {
+          saveNote(NoteId: ID!, title: String!, content: String!): Note
+          deleteNote(NoteId: ID!): Note
+        }
+        type Schema {
+          query: Query
+          mutation: Mutation
+        }
