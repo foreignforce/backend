@@ -58,11 +58,11 @@ Resources:
       ClientName: foreignforce-appsync-client
       UserPoolId: !Ref UserPool
 
-  DynamoDBTable:
+  DynamoDBUserTable:
     Type: "AWS::DynamoDB::Table"
     Description: "Data store for AWS AppSync"
     Properties:
-      TableName: foreignforce-notes-table
+      TableName: foreignforce-user-table
       AttributeDefinitions:
         - AttributeName: "NoteId"
           AttributeType: "S"
