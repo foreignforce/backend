@@ -93,3 +93,15 @@ Resources:
     Properties:
       ApiId: !GetAtt AppSyncApi.ApiId
       DefinitionS3Location: ./schema.graphql
+
+  AppSyncUserTableDataSource:
+    Type: "AWS::AppSync::DataSource"
+    Properties:
+      ApiId: !GetAtt AppSyncApi.ApiId
+      Name: !Sub foreignforce_user_table
+      Description: "The User Table AppSync Data Source"
+      Type: AMAZON_DYNAMODB
+      ServiceRoleArn: !GetAtt DynamoDBRole.Arn
+      DynamoDBConfig:
+        TableName: !Ref DynamoDBUserTable
+        AwsRegion: !Sub ${AWS::Region}
